@@ -11,7 +11,7 @@ public class MusicBattle {
     }
 
     public void setCompCharacter() {
-        int random = (int) ((Math.random() * 5) + 1);
+        int random = (int) ((Math.random() * 3) + 1);
         if (random == 1) compCharacter = "Drake";
         if (random == 2) compCharacter = "Kanye West";
         if (random == 3) compCharacter = "Ice Spice";
@@ -21,37 +21,30 @@ public class MusicBattle {
         return userCharacter;
     }
 
-    public String getCompCharacter() {
-        return compCharacter;
-    }
+    public String getCompCharacter() { return compCharacter;}
 
-    public int getUserHealth() {
-        return userHealth;
-    }
+    public int getUserHealth() { return userHealth; }
 
-    public int getCompHealth() {
-        return compHealth;
-    }
+    public int getCompHealth() { return compHealth; }
 
     public String userAttackOptions() {
+        String options = "";
         if (userCharacter.equals("Playboi Carti")) {
-            return " 1. Throw adlibs bomb \n 2. Call Pierre Bourne for help \n 3. Metamorphasize \n 4. Take shirt off";
+            options += " 1. Throw adlibs bomb \n 2. Call Pierre Bourne for help \n 3. Metamorphasize \n 4. Take shirt off";
         }
         if (userCharacter.equals("A$AP Rocky")) {
-            return " 1. Call the A$AP Mob \n 2. Use Tylers flower bomb \n 3. tbd \n 4. tbd \n 5. tbd";
+            options += " 1. Call the A$AP Mob \n 2. Use Tylers flower bomb \n 3. tbd \n 4. tbd \n 5. tbd";
         }
         if (userCharacter.equals("21 Savage")) {
-            return " 1. Call Metro Boomin for help \n 2. ";
+            options += " 1. Call Metro Boomin for help \n 2. ";
         }
-        return null;
+        return options;
     }
 
     public String userAttack(int num) {
         String attack = "You chose to ";
         if (userCharacter.equals("Playboi Carti")) {
-            if (num == 1) {
-                attack += "throw Adlibs bomb \nWHAT SLATT PUSH SLATT WHAT!";
-            }
+            if (num == 1) attack += "throw Adlibs bomb \nWHAT SLATT PUSH SLATT WHAT!";
             if (num == 2) {
                 attack += "call Pierre Bourne for help \nPierre has come out here and punched the opponent";
             }
@@ -142,27 +135,53 @@ public class MusicBattle {
     }
 
     public int damageDealt() {
-        int damage = (int) ((Math.random() * 4) + 1);
+        int damage = (int) ((Math.random() * 100) + 1);
         return damage;
     }
 
     public String damageLine(int damage, String character) {
         String line = "";
+        String opponent = "";
+        int random = (int) ((Math.random() * 3) + 1);
         // damage against this character
         if (character.equals(userCharacter)) {
-            if (userHealth - damage <= 0) {
-                userHealth = 0;
-            }
-            userHealth -= damage;
+            if (userHealth - damage <= 0) userHealth = 0;
+            else userHealth -= damage;
+            opponent = compCharacter;
         }
         if (character.equals(compCharacter)) {
-            if (compHealth - damage <= 0) {
-                compHealth = 0;
-            }
-            compHealth -= damage;
+            if (compHealth - damage <= 0) compHealth = 0;
+            else compHealth -= damage;
+            opponent = userCharacter;
         }
-        if (damage == 100) {}
-        if (userHealth == 0) {return compCharacter + " has defeated " + userCharacter + "\n You Lost!";}
-        if (compHealth == 0) {return userCharacter + " has defeated " + compCharacter + "\n You Won!";}
+        if (damage >= 70) {
+            if (random == 1) line += opponent + " has inflicted MASSIVE damage on " + character;
+            if (random == 2) line += character + " has taken CRITICAL damage";
+            if (random == 3) line += "";
+        }
+        else if (damage >= 50){
+            if (random == 1) line += character;
+            if (random == 2) line += opponent;
+            if (random == 3) line += "";
+        }
+        else if (damage >= 25){
+            if (random == 1) line += character;
+            if (random == 2) line += opponent;
+            if (random == 3) line += "";
+        }
+        else if (damage >= 10){
+            if (random == 1) line += character;
+            if (random == 2) line += opponent;
+            if (random == 3) line += "";
+        }
+        else if (damage == 0){
+            if (random == 1) line += character;
+            if (random == 2) line += opponent;
+            if (random == 3) line += "";
+        }
+        if (userHealth == 0) {line += compCharacter + " has defeated " + userCharacter + "\n You Lost!";}
+        if (compHealth == 0) {line += userCharacter + " has defeated " + compCharacter + "\n You Won!";}
+        return line;
     }
+
 }

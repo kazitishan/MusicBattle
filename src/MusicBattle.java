@@ -52,7 +52,7 @@ public class MusicBattle {
                 attack += "metamorphasize \nPlayboi Carti has metamorphasized into a vampire and sucked the enemies blood";
             }
             if (num == 4) {
-                attack += "take shirt off \nThe enemy has stopped breathing";
+                attack += "take shirt off \n" + compCharacter + " has stopped breathing";
             }
         }
         if (userCharacter.equals("A$AP Rocky")) {
@@ -88,7 +88,7 @@ public class MusicBattle {
 
     public String compAttack() {
         int random = (int) ((Math.random() * 4) + 1);
-        String attack = compCharacter + "has decided to ";
+        String attack = compCharacter + " has decided to ";
         if (compCharacter.equals("Drake")) {
             if (random == 1) {
                 attack += "call Future for help \n";
@@ -135,53 +135,56 @@ public class MusicBattle {
     }
 
     public int damageDealt() {
-        int damage = (int) ((Math.random() * 100) + 1);
+        int damage = (int) ((Math.random() * 50) + 1);
         return damage;
     }
 
-    public String damageLine(int damage, String character) {
+    public String damageLine(String character) {
         String line = "";
         String opponent = "";
-        int random = (int) ((Math.random() * 3) + 1);
+        int damage = damageDealt();
         // damage against this character
         if (character.equals(userCharacter)) {
-            if (userHealth - damage <= 0) userHealth = 0;
+            if (userHealth - damage <= 0) {
+                damage = userHealth;
+                userHealth = 0;
+            }
             else userHealth -= damage;
             opponent = compCharacter;
         }
         if (character.equals(compCharacter)) {
-            if (compHealth - damage <= 0) compHealth = 0;
+            if (compHealth - damage <= 0) {
+                damage = compHealth;
+                compHealth = 0;
+            }
             else compHealth -= damage;
             opponent = userCharacter;
         }
-        if (damage >= 70) {
-            if (random == 1) line += opponent + " has inflicted MASSIVE damage on " + character;
-            if (random == 2) line += character + " has taken CRITICAL damage";
-            if (random == 3) line += "";
+        if (damage >= 40) {
+            line += opponent + " has inflicted MASSIVE damage on " + character + " (-" + damage + ")\n";
         }
-        else if (damage >= 50){
-            if (random == 1) line += character;
-            if (random == 2) line += opponent;
-            if (random == 3) line += "";
+        else if (damage >= 30){
+            line += opponent + " has inflicted a lot of damage on " + character + " (-" + damage + ")\n";
         }
-        else if (damage >= 25){
-            if (random == 1) line += character;
-            if (random == 2) line += opponent;
-            if (random == 3) line += "";
+        else if (damage >= 20){
+            line += opponent + " has inflicted a decent amount of damage on " + character + " (-" + damage + ")\n";
         }
         else if (damage >= 10){
-            if (random == 1) line += character;
-            if (random == 2) line += opponent;
-            if (random == 3) line += "";
+            line += opponent + " has inflicted light damage on " + character + " (-" + damage + ")\n";
         }
         else if (damage == 0){
-            if (random == 1) line += character;
-            if (random == 2) line += opponent;
-            if (random == 3) line += "";
+            line += opponent + " didn't even make " + character + " move LMAO" + "\n";
         }
         if (userHealth == 0) {line += compCharacter + " has defeated " + userCharacter + "\n You Lost!";}
         if (compHealth == 0) {line += userCharacter + " has defeated " + compCharacter + "\n You Won!";}
         return line;
     }
+
+    public boolean gameContinuing(){
+        if (userHealth == 0 || compHealth == 0) return false;
+        return true;
+    }
+
+
 
 }

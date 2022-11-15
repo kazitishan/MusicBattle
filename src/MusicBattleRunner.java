@@ -11,11 +11,27 @@ public class MusicBattleRunner {
         System.out.println("\n" + user + " was strolling the streets of New York until he came across a wild " + opponent);
         System.out.println(opponent + " looked at him dead in the eyes and they both knew they wanted to fight ");
         System.out.println("FIGHT! \n");
-        System.out.println(m.userAttackOptions());
-        System.out.print("What attack would you like to choose: ");
-        int chosenAttack = s.nextInt();
-        System.out.println("\n" + m.userAttack(chosenAttack) + "\n");
-        // insert user attack here
-        System.out.println("It is now " + opponent + "'s turn");
+        boolean userTurn = true;
+        while (m.gameContinuing()){
+            if (userTurn){
+                System.out.println(m.userAttackOptions());
+                System.out.print("What attack would you like to choose: ");
+                int chosenAttack = s.nextInt();
+                System.out.println("\n" + m.userAttack(chosenAttack) + "\n");
+                System.out.println(m.damageLine(opponent));
+            }
+            if (userTurn == false){
+                System.out.println("It is now " + opponent + "'s turn");
+                System.out.println(m.compAttack());
+                System.out.println(m.damageLine(user));
+            }
+            System.out.println(user + " health: " + m.getUserHealth() + "\n" + opponent + " health: " + m.getCompHealth() + "\n");
+            if (userTurn == true) userTurn = false;
+            else userTurn = true;
+        }
+
+
+
+
     }
 }

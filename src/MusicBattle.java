@@ -33,7 +33,7 @@ public class MusicBattle {
             options += " 1. Throw adlibs bomb \n 2. Call Pierre Bourne for help \n 3. Metamorphasize \n 4. Take shirt off";
         }
         if (userCharacter.equals("A$AP Rocky")) {
-            options += " 1. Call the A$AP Mob \n 2. Use Tylers flower bomb \n 3. tbd \n 4. tbd \n 5. tbd";
+            options += " 1. Call the A$AP Mob \n 2. Use Tylers flower bomb \n 3. Umbrella-ella-ella \n 4. Cloud Storm";
         }
         if (userCharacter.equals("21 Savage")) {
             options += " 1. Call Metro Boomin for help \n 2. ";
@@ -172,11 +172,14 @@ public class MusicBattle {
         else if (damage >= 10){
             line += opponent + " has inflicted light damage on " + character + " (-" + damage + ")\n";
         }
-        else if (damage == 0){
-            line += opponent + " didn't even make " + character + " move LMAO" + "\n";
+        else if (damage > 0) {
+            line += opponent + " BARELY did any damage to " + character + " (-" + damage + ")\n";
         }
-        if (userHealth == 0) {line += compCharacter + " has defeated " + userCharacter + "\n You Lost!";}
-        if (compHealth == 0) {line += userCharacter + " has defeated " + compCharacter + "\n You Won!";}
+        else if (damage == 0){
+            line += opponent + " didn't even touch " + character + " move LMAO" + "\n";
+        }
+        if (userHealth == 0) {line += compCharacter + " has defeated " + userCharacter;}
+        if (compHealth == 0) {line += userCharacter + " has defeated " + compCharacter;}
         return line;
     }
 
@@ -185,6 +188,13 @@ public class MusicBattle {
         return true;
     }
 
+    private boolean userWon(){
+        if (compHealth == 0) return true;
+        else return false;
+    }
 
-
+    public String battleStatus(){
+        if (userWon()) return "You Won!";
+        else return "You Lost!";
+    }
 }

@@ -4,15 +4,21 @@ import java.util.concurrent.TimeUnit;
 public class MusicBattleRunner {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        System.out.print(" 1. Playboi Carti \n 2. A$AP Rocky \n 3. 21 Savage \nWhich character would you like to choose: ");
+        final String RED = "\u001B[31m";
+        final String GREEN = "\u001B[32m";
+        final String YELLOW = "\u001B[33m";
+        final String BLUE = "\u001B[34m";
+        final String PURPLE = "\u001B[35m";
+        final String RESET = "\u001B[0m";
+        System.out.print(BLUE + " 1. Playboi Carti \n 2. A$AP Rocky \n 3. 21 Savage \n" + RESET + "Which character would you like to choose: ");
         int chosenCharacter = s.nextInt();
         MusicBattle battle = new MusicBattle(chosenCharacter);
         battle.setCompCharacter();
         String user = battle.getUserCharacter();
         String opponent = battle.getCompCharacter();
-        System.out.println("\n" + user + " was strolling the streets of New York until he came across a wild " + opponent);
-        System.out.println(opponent + " looked at him dead in the eyes and they both knew they wanted to fight ");
-        System.out.println("FIGHT! \n");
+        System.out.println(PURPLE + "\n" + user + " was strolling the streets of New York until he came across a wild " + opponent);
+        System.out.println(opponent + " looked at him dead in the eyes and they both knew they wanted to fight " + RESET);
+        System.out.println(RED + "FIGHT! \n" + RESET);
         boolean userTurn = true;
         while (battle.gameContinuing()){
             if (userTurn){
@@ -28,8 +34,8 @@ public class MusicBattleRunner {
                 }
             }
             if (userTurn == false){
-                System.out.println("It is now " + opponent + "'s turn");
-                System.out.println(battle.compAttack());
+                System.out.println(PURPLE + "It is now " + opponent + "'s turn");
+                System.out.println(battle.compAttack() + RESET);
                 System.out.println(battle.damageLine(user));
                 try {
                     Thread.sleep(3000);

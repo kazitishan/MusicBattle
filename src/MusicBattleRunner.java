@@ -6,7 +6,6 @@ public class MusicBattleRunner {
         Scanner s = new Scanner(System.in);
         final String RED = "\u001B[31m";
         final String GREEN = "\u001B[32m";
-        final String YELLOW = "\u001B[33m";
         final String BLUE = "\u001B[34m";
         final String PURPLE = "\u001B[35m";
         final String RESET = "\u001B[0m";
@@ -22,13 +21,13 @@ public class MusicBattleRunner {
         boolean userTurn = true;
         while (battle.gameContinuing()){
             if (userTurn){
-                System.out.println(battle.userAttackOptions());
+                System.out.println(BLUE + battle.userAttackOptions() + RESET);
                 System.out.print("What attack would you like to choose: ");
                 int chosenAttack = s.nextInt();
-                System.out.println("\n" + battle.userAttack(chosenAttack) + "\n");
+                System.out.println(PURPLE + "\n" + battle.userAttack(chosenAttack) + "\n" + RESET);
                 System.out.println(battle.damageLine(opponent));
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -38,12 +37,12 @@ public class MusicBattleRunner {
                 System.out.println(battle.compAttack() + RESET);
                 System.out.println(battle.damageLine(user));
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
             }
-            System.out.println(user + " health: " + battle.getUserHealth() + "\n" + opponent + " health: " + battle.getCompHealth() + "\n");
+            System.out.println(GREEN + battle.getBothHealth() + "\n" + RESET);
             if (userTurn == true) userTurn = false;
             else userTurn = true;
         }

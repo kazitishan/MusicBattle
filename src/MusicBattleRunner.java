@@ -9,7 +9,7 @@ public class MusicBattleRunner {
         final String BLUE = "\u001B[34m";
         final String PURPLE = "\u001B[35m";
         final String RESET = "\u001B[0m";
-        System.out.print(BLUE + " 1. Playboi Carti \n 2. A$AP Rocky \n 3. 21 Savage \n" + RESET + "Which character would you like to choose: ");
+        System.out.print(BLUE + " 1. Playboi Carti \n 2. A$AP Rocky \n 3. Kanye West \n" + RESET + "Which character would you like to choose: ");
         int chosenCharacter = s.nextInt();
         MusicBattle battle = new MusicBattle(chosenCharacter);
         battle.setCompCharacter();
@@ -46,6 +46,7 @@ public class MusicBattleRunner {
             if (userTurn == true) userTurn = false;
             else userTurn = true;
         }
-        System.out.println(battle.battleStatus());
+        if (battle.userWon()) System.out.println(GREEN + "You Won!" + RESET);
+        else System.out.println(RED + "You Lost!" + RESET);
     }
 }

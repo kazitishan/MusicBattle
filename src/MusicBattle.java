@@ -5,7 +5,6 @@ public class MusicBattle {
     int compHealth = 100;
 
     final String RED = "\u001B[31m";
-    final String GREEN = "\u001B[32m";
     final String RESET = "\u001B[0m";
 
     /**
@@ -179,21 +178,12 @@ public class MusicBattle {
     }
 
     /**
-     * Is used in another method and determines if the user has won or not
+     * Is used in MusicBattleRunner class
      * @return - Returns true if compHealth is 0, and returns false if otherwise
      */
-    private boolean userWon(){
+    public boolean userWon(){
         if (compHealth == 0) return true;
         else return false;
-    }
-
-    /**
-     * Uses the userWon method to determine what string to return
-     * @return - If userWon is true, You Won! is returned in green text and if userWon is false, You Lost! is returned in red text
-     */
-    public String battleStatus(){
-        if (userWon()) return GREEN + "You Won!" + RESET;
-        else return RED + "You Lost!" + RESET;
     }
 
     /**
